@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+    tools {
+        node 'NodeJS 11.0.0' 
+    }
+    stages {
+        stage('Build') {
+            tools {
+                node 'NodeJS 4.8.6'
+            }
+            steps {
+                echo "Building Stage...."
+                sh 'npm install'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo "Testing Stage...."
+                sh 'npm install'
+                sh 'npm run test'
+                sh 'npm run coverage'
+            }
+        }
+        
+        stage('Package') {
+            steps {
+                echo "Packaging Stage...."
+                sh 'npm install'
+                sh 'npm run package'
+            }
+        }
+    }
+}
